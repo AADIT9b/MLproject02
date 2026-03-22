@@ -20,7 +20,7 @@ class CustomException(Exception):
     def __str__(self):
         return self.error_message
 
-
+# this is for checking purpose to  validate that exception  are working perfectly or not :
 if __name__ == "__main__":
     try:
         a = 1 / 0   # force error
