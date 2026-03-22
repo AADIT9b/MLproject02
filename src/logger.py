@@ -14,5 +14,6 @@ logging.basicConfig(
   level=logging.INFO
 )
 
+# this is for checking purpose to  validate that logger  are working perfectly or not :
 if __name__=="__main__":
   logging.info("Logging has started")
