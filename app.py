@@ -32,7 +32,6 @@ def predict_datapoint():
                 writing_score=float(request.form.get('writing_score')))
             
             pred_df=data.get_data_as_data_frame()
-            print(pred_df)
 
             predict_pipeline=PredictPipeline()
             results=predict_pipeline.predict(pred_df)
@@ -44,6 +43,8 @@ def predict_datapoint():
     
     
 
-if __name__=="__main__":      
-    app.run(host="127.0.0.1", port=5000, debug=True)  
+if __name__=="__main__":
+    import os
+    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(host="0.0.0.0", port=int(os.getenv('PORT', 5000)), debug=debug_mode)  
     
