@@ -2,38 +2,167 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Exam Performance Indicator</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            margin: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
-        h1, h2 {
-            font-weight: bold;
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            max-width: 550px;
+            width: 100%;
         }
+
+        h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
         label {
-            display: inline-block;
-            width: 220px;
-            margin-top: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
+
         select, input {
-            margin-top: 8px;
-            padding: 3px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
         }
+
+        select:hover, input:hover {
+            border-color: #667eea;
+            background-color: #fff;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background-color: #fff;
+        }
+
         button {
-            margin-top: 12px;
-            padding: 6px 10px;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            background-color: #fee;
+            border-left: 4px solid #f44336;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-weight: 500;
+        }
+
+        .success-message {
+            background-color: #efe;
+            border-left: 4px solid #4caf50;
+            color: #1b5e20;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-weight: 500;
+            font-size: 18px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            label {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Student Exam Performance Indicator</h1>
+        <h2>Predict Your Maths Score</h2>
 
-    <h1>Student Exam Performance Indicator</h1>
-    <h2>Student Exam Performance Prediction</h2>
+        <form action="{{url_for('predict_datapoint')}}" method="POST">
 
-    <form action="{{url_for('predict_datapoint')}}" method="POST">
-
-        <div>
+        <div class="form-group">
             <label>Gender</label>
             <select name="gender" placeholder="Enter your gender" required>
                 <option selected disabled>Select your Gender</option>
@@ -42,7 +171,7 @@
             </select>
         </div>
 
-        <div>
+        <div class="form-group">
             <label>Race or Ethnicity</label>
             <select name="ethnicity" placeholder="Enter your ethinicity" required>
                 <option selected disabled>Select Ethnicity</option>
@@ -54,7 +183,7 @@
             </select>
         </div>
 
-        <div>
+        <div class="form-group">
             <label>Parental Level of Education</label>
             <select name="parental_level_of_education" placeholder="Enter your parent_education" required>
                 <option selected disabled>Select Parent Education</option>
@@ -65,7 +194,7 @@
             </select>
         </div>
 
-        <div>
+        <div class="form-group">
             <label>Lunch Type</label>
             <select name="lunch" placeholder="Enter your lunch" required>
                 <option selected disabled>Select Lunch Type</option>
@@ -74,7 +203,7 @@
             </select>
         </div>
 
-        <div>
+        <div class="form-group">
             <label>Test Preparation Course</label>
             <select name="test_preparation_course" placeholder="Enter your test_preparation_course" required>
                 <option selected disabled>Select Test course</option>
@@ -83,23 +212,26 @@
             </select>
         </div>
 
-        <div>
+        <div class="form-group">
             <label>Writing Score out of 100</label>
-            <input type="number" name="writing_score" placeholder="Enter your score" required>
+            <input type="number" name="writing_score" placeholder="Enter your score" min="0" max="100" required>
         </div>
 
-        <div>
+        <div class="form-group">
             <label>Reading Score out of 100</label>
-            <input type="number" name="reading_score" placeholder="Enter your score" required>
+            <input type="number" name="reading_score" placeholder="Enter your score" min="0" max="100" required>
         </div>
 
-        <div>
-            <button type="submit">Predict your Maths Score</button>
-        </div>
+        <button type="submit">Predict your Maths Score</button>
 
     </form>
 
-    <h3>THE prediction is {{results}}</h3>
+    {% if error_message %}
+        <div class="error-message">❌ {{ error_message }}</div>
+    {% elif results is not none %}
+        <div class="success-message">✓ Your Predicted Maths Score: <strong>{{ "%.2f"|format(results) }}</strong></div>
+    {% endif %}
 
+    </div>
 </body>
 </html>

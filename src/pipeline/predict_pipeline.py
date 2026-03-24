@@ -34,6 +34,12 @@ class CustomData:
         reading_score: int,
         writing_score: int):
 
+        # Validate scores are within valid range
+        if reading_score < 0 or reading_score > 100:
+            raise ValueError(f"Reading score must be between 0 and 100, got {reading_score}")
+        if writing_score < 0 or writing_score > 100:
+            raise ValueError(f"Writing score must be between 0 and 100, got {writing_score}")
+
         self.gender = gender
 
         self.race_ethnicity = race_ethnicity
