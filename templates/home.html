@@ -488,7 +488,7 @@
 
                 <div class="button-wrapper">
                     <button type="submit">🎯 Predict Score</button>
-                    <button type="reset" class="reset-btn">↻ Clear</button>
+                    <button type="button" class="reset-btn" id="clearBtn">↻ Clear</button>
                 </div>
             </form>
 
@@ -521,13 +521,32 @@
     </div>
 
     <script>
-        // Input focus animation
-        document.querySelectorAll('.form-input, select').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.style.transform = 'scale(1.02)';
-            });
-            input.addEventListener('blur', function() {
-                this.style.transform = 'scale(1)';
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const clearBtn = document.getElementById('clearBtn');
+            const messageContainer = document.querySelector('.message-container');
+
+            if (clearBtn && messageContainer) {
+                // Clear button - Removes only the prediction/error message
+                clearBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Clear clicked!'); // Debug log
+                    
+                    // Only clear the prediction/error messages
+                    messageContainer.innerHTML = '';
+                });
+            } else {
+                console.log('clearBtn or messageContainer not found'); // Debug
+            }
+
+            // Input focus animation
+            document.querySelectorAll('.form-input, select').forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.transform = 'scale(1.02)';
+                });
+                input.addEventListener('blur', function() {
+                    this.style.transform = 'scale(1)';
+                });
             });
         });
     </script>
